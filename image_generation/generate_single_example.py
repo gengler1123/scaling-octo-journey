@@ -7,6 +7,8 @@ from utils import createBoundingBoxes, generate_image_section, generate_annotati
 import matplotlib.pyplot as plt
 import psycopg2 as psql
 from db_writes import send_file_query, send_bbox_query
+from os.path import isdir
+from os import mkdir
 
 
 def generate_single_example(TEXT_SAMPLES: List[str],
@@ -124,6 +126,10 @@ def generate_single_example(TEXT_SAMPLES: List[str],
     img_id = f"{uuid4()}"
     filename = f"{img_id}.{img_type}"
     write_path = f"{write_dir}/{filename}"
+    
+    if not isdir(write_dir):
+        mkdir(write_dir)
+    
     cv2.imwrite(write_path, WRITE_IMG)
 
     IMG = generate_image_section(
