@@ -1,0 +1,2 @@
+from .handwriting_bbox_write import send_bbox_query
+from .handwriting_file_write import send_file_query
